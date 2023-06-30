@@ -24,10 +24,10 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml -Djacoco.skip=true -Dsurefire.useFile=false -DdisableXmlReport=true
-
-    - name: setup docker
-      uses: docker-practice/actions-setup-docker@master
-      timeout-minutes: 12
-    - name: Image Build
+    - name: Docker login
       run: |
-        docker build . -t petclinic:1.0
+        docker login -u specialops -p $CICD_TOKEN
+    - name: Image Build & publish
+      run: |
+          docker build . -t specialops/petclinic:$GITHUB_RUN_NUMBER
+          docker push specialops/petclinic:$GITHUB_RUN_NUMBER
