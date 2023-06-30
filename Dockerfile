@@ -4,14 +4,13 @@ FROM ubuntu:latest
 RUN apt-get update && apt-get install -y openjdk-11-jdk curl
 
 # Set environment variables for Tomcat version and installation directory
-ENV TOMCAT_MAJOR_VERSION 
-ENV TOMCAT_MINOR_VERSION 8.5.69
+
 ENV CATALINA_HOME /opt/tomcat
 
 # Download and extract Apache Tomcat
-RUN curl -O https://downloads.apache.org/tomcat/tomcat-${TOMCAT_MAJOR_VERSION}/v${TOMCAT_MINOR_VERSION}/bin/apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz && \
-    tar -xf apache-tomcat-${TOMCAT_MINOR_VERSION}.tar.gz -C /opt && \
-    mv /opt/apache-tomcat-${TOMCAT_MINOR_VERSION} ${CATALINA_HOME}
+RUN curl -O https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.69/bin/apache-tomcat-8.5.69.tar.gz && \
+    tar -xf apache-tomcat-8.5.69.tar.gz -C /opt && \
+    mv /opt/apache-tomcat-8.5.69.tar.gz ${CATALINA_HOME}
 
 # Copy your WAR file to the Tomcat webapps directory
 COPY target/*.war ${CATALINA_HOME}/webapps/
