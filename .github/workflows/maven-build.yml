@@ -25,6 +25,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml -Djacoco.skip=true -Dsurefire.useFile=false -DdisableXmlReport=true
     - name: Docker login
+      env:
+        CICD_TOKEN: ${{ secrets.CICD_TOKEN }}
       run: |
         docker login -u specialops -p $CICD_TOKEN
     - name: Image Build & publish
