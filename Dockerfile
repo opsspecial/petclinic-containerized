@@ -15,7 +15,7 @@ RUN mkdir -p ${CATALINA_HOME} && \
     rm -rf /tmp/apache-tomcat.tar.gz /tmp/apache-tomcat-8.5.69
 
 # Copy your WAR file to the Tomcat webapps directory
-COPY target/*.war ${CATALINA_HOME}/webapps/
+COPY target/*.war ${CATALINA_HOME}/webapps/ROOT.war
 
 # Expose port 8080 for HTTP traffic
 EXPOSE 8080
